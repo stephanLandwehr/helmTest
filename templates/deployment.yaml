@@ -1,0 +1,51 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  annotations:
+    alpha.image.policy.openshift.io/resolve-names: '*'
+    app.openshift.io/vcs-ref: master
+    app.openshift.io/vcs-uri: 'https://github.com/stephanLandwehr/pubGitHub-ostests.git'
+    deployment.kubernetes.io/revision: '2'
+    image.openshift.io/triggers: >-
+      [{"from":{"kind":"ImageStreamTag","name":"go-comp:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"go-comp\")].image"}]
+  selfLink: /apis/apps/v1/namespaces/0-go-tests/deployments/go-comp
+  name: go-comp
+  labels:
+    app: go-comp
+    app.kubernetes.io/component: go-comp
+    app.kubernetes.io/instance: go-comp
+    app.kubernetes.io/name: golang
+    app.kubernetes.io/part-of: go-app
+    app.openshift.io/runtime: golang
+    app.openshift.io/runtime-version: latest
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: go-comp
+  template:
+    metadata:
+      labels:
+        app: go-comp
+        deploymentconfig: go-comp
+    spec:
+      containers:
+        - name: go-comp
+          image: >-
+            image-registry.openshift-image-registry.svc:5000/0-yaml-buildconfig/go-comp
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

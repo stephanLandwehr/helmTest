@@ -1,0 +1,12 @@
+kind: ImageStreamTag
+apiVersion: image.openshift.io/v1
+metadata:
+  name: 'go-comp:latest'
+  labels:
+    app: go-comp
+    app.kubernetes.io/component: go-comp
+    app.kubernetes.io/instance: go-comp
+    app.kubernetes.io/name: golang
+    app.kubernetes.io/part-of: go-app
+    app.openshift.io/runtime: golang
+    app.openshift.io/runtime-version: latest

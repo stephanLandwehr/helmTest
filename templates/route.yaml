@@ -1,0 +1,14 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: go-comp-route
+spec:
+  to:
+    kind: Service
+    name: go-comp-service
+    weight: 100
+  port:
+    targetPort: 8082
+  tls:
+    termination: edge
+  wildcardPolicy: None
