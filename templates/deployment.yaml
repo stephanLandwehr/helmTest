@@ -4,7 +4,7 @@ metadata:
   annotations:
     alpha.image.policy.openshift.io/resolve-names: '*'
     app.openshift.io/vcs-ref: master
-    app.openshift.io/vcs-uri: 'https://github.com/stephanLandwehr/pubGitHub-ostests.git'
+    app.openshift.io/vcs-uri: {{ .Values.githubRepo }}
     deployment.kubernetes.io/revision: '2'
     image.openshift.io/triggers: >-
       [{"from":{"kind":"ImageStreamTag","name":"go-comp:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"go-comp\")].image"}]
@@ -19,7 +19,7 @@ metadata:
     app.openshift.io/runtime: golang
     app.openshift.io/runtime-version: latest
 spec:
-  replicas: 0
+  replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
       app: go-comp

@@ -8,7 +8,7 @@ spec:
     name: go-comp-service
     weight: 100
   port:
-    targetPort: 8082
+    targetPort: {{ .Values.targetPort }}
   tls:
     termination: edge
   wildcardPolicy: None

@@ -13,7 +13,7 @@ metadata:
   annotations:
     template.alpha.openshift.io/wait-for-ready: "true"
     app.openshift.io/vcs-ref: master
-    app.openshift.io/vcs-uri: 'https://github.com/stephanLandwehr/pubGitHub-ostests.git'
+    app.openshift.io/vcs-uri: {{ .Values.githubRepo }}
 spec:
   nodeSelector: null
   output:
@@ -34,7 +34,7 @@ spec:
   source:
     type: Git
     git:
-      uri: 'https://github.com/stephanLandwehr/pubGitHub-ostests.git'
+      uri: {{ .Values.githubRepo }}
     contextDir: /
   triggers:
     - type: Generic

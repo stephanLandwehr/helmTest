@@ -1,0 +1,4 @@
+replicas: 0
+githubRepo: 'https://github.com/stephanLandwehr/pubGitHub-ostests.git'
+targetPort: 8082
+port: 8082

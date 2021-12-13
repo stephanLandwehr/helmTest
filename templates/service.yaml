@@ -5,8 +5,8 @@ metadata:
 spec:
   ports:
     - protocol: TCP
-      port: 8082
-      targetPort: 8082
+      port: {{ .Values.port }}
+      targetPort: {{ .Values.targetPort }}
   selector:
     app: go-comp
   type: ClusterIP
